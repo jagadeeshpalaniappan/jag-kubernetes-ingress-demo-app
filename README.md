@@ -1,4 +1,4 @@
-# Kubernetes Demo App (using Ingress)
+# Kubernetes (Node.js) Demo App (using Ingress)
 
 This is a sample Kubernetes Demo App (using Ingress).
 
