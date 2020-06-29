@@ -2,25 +2,30 @@
 
 This is a sample Book Store (Microservices) Application, This has
 
-### API Gateway
+## Apps Summary:
 
-- Ingress (nginx)
+### API Gateway:
 
-### MicroServices
+- **Ingress** (nginx)
 
-- (**Ingress**)
+### UI Apps: (Frontend)
+
+- app1.com (Node.js App)
+- photos.app1.com (Node.js App)
+- blogs.app1.com (Node.js App)
+
+### MicroServices: (Backend)
+
 - Auth API (Node.js App)
-- Microservice: Photo API (Node.js App)
-- Microservice: Post API (Node.js App)
-- Microservice: User API (Node.js App)
-
-### UI Apps
+- Photo API (Node.js App)
+- Post API (Node.js App)
+- User API (Node.js App)
 
 ## Local Setup
 
 ### Step1: Machine Setup
 
-```s
+```shell
 # Install `minikube` (for Mac OS)
 brew install minikube
 
@@ -41,7 +46,7 @@ kubectl get pods -n kube-system
 
 ### Step2: App Setup (Build Docker Images)
 
-```s
+```shell
 # Point to Local Docker Registry (VERY IMP)
 ###############################
 eval $(minikube docker-env)
@@ -64,7 +69,7 @@ docker images
 
 ### Step3: App Setup (Deploy docker images - in Kubernetes)
 
-```s
+```shell
 # create: nameSpace
 kubectl create namespace app1-ns
 
@@ -93,7 +98,7 @@ minikube service list
 
 ### Map `Ingress` service to `local` domain name (app1.com):
 
-```s
+```shell
 # copy: IP address (Note: if you dont see any address, wait for sometime and try again)
 kubectl get ingress
 
@@ -124,7 +129,7 @@ https://app1.com/blogs
 
 ### How to generate to TLS certificate in Local ?
 
-```s
+```shell
 # DEMO-PURPOSE-ONLY: This is sefl-signed certificate, get your own 'TLS certificate' -from 3rd party - to use it in production
 # generate: sample 'tls.key' and 'tls.crt' file
 openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -subj "/CN=app1.com" -keyout tls.key -out tls.crt
