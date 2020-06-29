@@ -2,9 +2,19 @@
 
 This is a sample Book Store (Microservices) Application, This has
 
-- API Gateway (Node.js App)
-- Microservice: Auth API (Node.js App)
-- Microservice: Books API (Node.js App)
+### API Gateway
+
+- Ingress (nginx)
+
+### MicroServices
+
+- (**Ingress**)
+- Auth API (Node.js App)
+- Microservice: Photo API (Node.js App)
+- Microservice: Post API (Node.js App)
+- Microservice: User API (Node.js App)
+
+### UI Apps
 
 ## Local Setup
 
@@ -16,6 +26,17 @@ brew install minikube
 
 # Start Minikube
 minikube start --driver=hyperkit
+
+# Enable Ingress Controller in Minikube
+minikube addons enable ingress
+
+# check: Ingress Controller is enabled
+minikube addons list
+
+# check: Ingress Controller is running
+# look: someting like this 'ingress-nginx-controller-xxx-yyy'
+kubectl get pods -n kube-system
+
 ```
 
 ### Step2: App Setup (Build Docker Images)
@@ -65,19 +86,14 @@ kubectl get pods
 # check: all objects
 kubectl get all -n app1-ns
 
-# Get: api-user-svc (just to check)
-# minikube service api-user-svc --url --namespace=app1-ns
-
-# Open the URL in browser
-# sample: http://127.0.0.1:51517/hello
-# http://127.0.0.1:<YOUR-PORT>/hello
+# check: all services
+minikube service list
 
 ```
 
-## Setting Up HTTPS in Ingress:
+### Map `Ingress` service to `local` domain name (app1.com):
 
 ```s
-
 # copy: IP address (Note: if you dont see any address, wait for sometime and try again)
 kubectl get ingress
 
@@ -106,7 +122,7 @@ https://app1.com/blogs
 
 ```
 
-## How to generate to TLS certificate in Local ?
+### How to generate to TLS certificate in Local ?
 
 ```s
 # DEMO-PURPOSE-ONLY: This is sefl-signed certificate, get your own 'TLS certificate' -from 3rd party - to use it in production
