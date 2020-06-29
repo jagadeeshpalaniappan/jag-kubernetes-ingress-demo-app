@@ -1,6 +1,6 @@
-# Kubernetes Microservice (Sample Node.js App)
+# Kubernetes Demo App (using Ingress)
 
-This is a sample Book Store (Microservices) Application, This has
+This is a sample Kubernetes Demo App (using Ingress).
 
 ## Apps Summary:
 
