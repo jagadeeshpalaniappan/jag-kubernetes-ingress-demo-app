@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-mongo-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      podLabel: db-mongo-pod-label
+  template:
+    metadata:
+      labels:
+        podLabel: db-mongo-pod-label
+    spec:
+      containers:
+        - name: db-mongo-pod-cont
+          image: mongo

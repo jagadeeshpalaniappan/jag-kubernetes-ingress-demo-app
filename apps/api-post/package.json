@@ -1,0 +1,15 @@
+{
+  "name": "api-post",
+  "version": "1.0.0",
+  "description": "Post API Microservice",
+  "main": "index.js",
+  "scripts": {
+    "serve": "node src/index.js"
+  },
+  "author": "Jagadeesh Palaniappan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.9.20"
+  }
+}

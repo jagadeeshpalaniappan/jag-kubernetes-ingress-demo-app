@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui-app1-com-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      podLabel: ui-app1-com-pod-label
+  template:
+    metadata:
+      labels:
+        podLabel: ui-app1-com-pod-label
+    spec:
+      containers:
+        - name: ui-app1-com-pod-cont
+          image: ui-app1-com-img:v1.0.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080

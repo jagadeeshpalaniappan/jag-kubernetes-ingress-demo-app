@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-user-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      podLabel: api-user-pod-label
+  template:
+    metadata:
+      labels:
+        podLabel: api-user-pod-label
+    spec:
+      containers:
+        - name: api-user-pod-cont
+          image: api-user-img:v1.0.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080

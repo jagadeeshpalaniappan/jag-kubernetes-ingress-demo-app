@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-auth-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      podLabel: api-auth-pod-label
+  template:
+    metadata:
+      labels:
+        podLabel: api-auth-pod-label
+    spec:
+      containers:
+        - name: api-auth-pod-cont
+          image: api-auth-img:v1.0.0
+          imagePullPolicy: Never
