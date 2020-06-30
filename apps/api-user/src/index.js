@@ -17,6 +17,8 @@ db.on("error", (err) => console.error("MongoDB connection error:", err));
 
 app.use(express.json());
 
+app.get("/health", (req, res) => res.json({ status: "RUNNING" }));
+
 app.use("/api/v1/users", userRouter);
 
 // Proxy to POSTS_API:

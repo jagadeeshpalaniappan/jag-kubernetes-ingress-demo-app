@@ -17,4 +17,7 @@ db.on("error", (err) => console.error("MongoDB connection error:", err));
 app.use(express.json());
 
 app.use("/api/v1/photos", photoRouter);
+
+app.get("/health", (req, res) => res.json({ status: "RUNNING" }));
+
 app.listen(PORT, () => console.log(`Photo API Server started PORT:${PORT}!`));

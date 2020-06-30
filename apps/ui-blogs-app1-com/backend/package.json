@@ -1,15 +1,15 @@
 {
   "name": "ui-blogs-app1-com",
   "version": "1.0.0",
-  "description": "blogs.app1.com (UI App)",
+  "description": "blogs.app1.com (UI: React App)",
   "main": "index.js",
   "scripts": {
-    "serve": "node src/index.js"
+    "serve": "node index.js"
   },
   "author": "Jagadeesh Palaniappan",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
-    "mongoose": "^5.9.20"
+    "http-proxy-middleware": "^1.0.4"
   }
 }

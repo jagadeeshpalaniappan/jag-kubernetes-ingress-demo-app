@@ -16,6 +16,15 @@ db.on("connected", () => console.log("Connected to MongoDB!", MONGODB_URL));
 db.on("error", (err) => console.error("MongoDB connection error:", err));
 
 app.use(express.json());
-
 app.use("/api/v1/posts", postRouter);
+
+app.get("/health", (req, res) => res.json({ status: "RUNNING" }));
+
+app.get("/api/tmp/posts", (req, res) =>
+  res.json([
+    { id: "p1", title: "Post 1" },
+    { id: "p2", title: "Post 2" },
+  ])
+);
+
 app.listen(PORT, () => console.log(`Post API Server started PORT:${PORT}!`));

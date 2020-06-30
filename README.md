@@ -138,3 +138,33 @@ openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -subj "/CN=app1.com"
 cat tls.crt | base64
 cat tls.key | base64
 ```
+
+### Build & Run (Docker Images) --without Kubernetes
+
+```shell
+# open: new terminal (dont run on the same minikube terminal)
+# check: Docker Desktop is Running
+
+# build: docker image
+docker build -t testdocker-img:v1.0.0 ./
+
+# view: docker image content
+docker run -it testdocker-img:v1.0.0 sh
+ls -l
+exit
+
+# run: docker image
+docker run -it -p 9002:8080 testdocker-img:v1.0.0
+# open: http://localhost:9002
+
+# run: docker image (in detached mode)
+docker run -d -p 9002:8080 testdocker-img:v1.0.0
+# open: http://localhost:9002
+
+# List All Process running
+$ docker ps
+
+# Print app output
+$ docker logs <containerId>
+
+```
