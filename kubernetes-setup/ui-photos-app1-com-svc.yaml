@@ -8,4 +8,4 @@ spec:
     podLabel: ui-photos-app1-com-pod-label
   ports:
     - protocol: TCP
-      port: 8080
+      port: 80

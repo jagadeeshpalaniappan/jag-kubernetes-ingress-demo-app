@@ -15,7 +15,7 @@
 # UI Apps: (Node.js) // TODO: modify to React
 # docker build ./apps/ui-app1-com -t ui-app1-com-img:v1.0.0
 # docker build ./apps/ui-blogs-app1-com -t ui-blogs-app1-com-img:v1.0.0
-docker build ./apps/ui-photos-app1-com -t ui-photos-app1-com-img:v1.0.0
+docker build ./apps/ui-photos-app1-com -t ui-photos-app1-com-img:v1.0.0 --no-cache
 
 # ------------------------------------------------
 
