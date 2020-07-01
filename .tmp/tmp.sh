@@ -1,6 +1,14 @@
 # Build Docker Images (locally)
 eval $(minikube docker-env)
 
+# set: namespace `book-store-ns` for the current context
+kubectl config set-context --current --namespace=app1-ns
+
+# check: namespace is set properly for the currentContext
+kubectl config get-contexts
+
+
+
 # ------------------------------------------------
 
 # Microservice Apps: (Node.js)
@@ -16,12 +24,6 @@ docker build ./apps/ui-photos-app1-com -t ui-photos-app1-com-img:v1.0.0
 
 # ------------------------------------------------
 
-# set: namespace `book-store-ns` for the current context
-kubectl config set-context --current --namespace=app1-ns
-
-# check: namespace is set properly for the currentContext
-kubectl config get-contexts
-
 # create: all kubernetes objects (reqd for this project)
 # [ deployments, pods, services ]
 ############################################
@@ -35,6 +37,7 @@ kubectl get pods
 kubectl get all -n book-store-ns
 
 
+kubectl set image deployment/ui-photos-app1-com-dep www=ui-photos-app1-com-img:v1.0.0
 
 # ------------------------------------------------
 
@@ -63,6 +66,20 @@ kubectl apply -f ./kubernetes-setup/
 docker build -t testdocker-img:v1.0.0 ./
 docker run -it -p 9002:8080 testdocker-img:v1.0.0
 
+# Dockerizing Create React App
+https://mherman.org/blog/dockerizing-a-react-app/
+
+# build: prod image
+docker build -t react-app-img:prod .
+# run: prod image
+docker run -it --rm -p 1337:80 react-app-img:prod
+
+
+# build: local image
+docker build -f Dockerfile.local -t react-app-img:local .
+
+# view: docker image content
+docker run -it react-app-img:prod sh
 
 # ------------------------------------------------
 

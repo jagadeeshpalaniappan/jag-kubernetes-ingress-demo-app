@@ -102,7 +102,8 @@ minikube service list
 # copy: IP address (Note: if you dont see any address, wait for sometime and try again)
 kubectl get ingress
 
-# add domain names in host file (for local testing) & paste: IP address
+#### Register 'app1.com' domain (locally)
+# add domain names in host file (for local testing) & paste: ingress IP address
 sudo vi /etc/hosts
 
 # add host entires (paste your own IP)
