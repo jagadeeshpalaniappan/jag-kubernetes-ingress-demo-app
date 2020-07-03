@@ -8,6 +8,6 @@ spec:
     - ReadWriteOnce
   storageClassName: fast
   hostPath:
-    path: "/mnt/data"
+    path: "/mnt/storage3"
   capacity:
     storage: 1Gi
