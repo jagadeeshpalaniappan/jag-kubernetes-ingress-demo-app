@@ -102,3 +102,18 @@ docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
 
 
 
+# Delete All
+kubectl delete --all deployments --namespace=foo
+kubectl delete --all pods --namespace=foo
+for each in $(kubectl get ns -o jsonpath="{.items[*].metadata.name}" | grep -v kube-system);
+do
+  kubectl delete ns $each
+done
+
+
+# Delete PV (not terminating)
+kubectl delete --all pv
+kubectl delete --all pvc
+
+kubectl get pv | tail -n+2 | awk '{print $1}' | xargs -I{} kubectl patch pv {} -p '{"metadata":{"finalizers": null}}'
+kubectl get pvc | tail -n+2 | awk '{print $1}' | xargs -I{} kubectl patch pvc {} -p '{"metadata":{"finalizers": null}}'

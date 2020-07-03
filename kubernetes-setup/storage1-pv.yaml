@@ -1,0 +1,13 @@
+# PersistentVolume
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: storage1-pv
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: fast
+  hostPath:
+    path: "/mnt/data"
+  capacity:
+    storage: 1Gi

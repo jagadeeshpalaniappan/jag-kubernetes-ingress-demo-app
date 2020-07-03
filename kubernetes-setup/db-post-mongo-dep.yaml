@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-post-mongo-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      podLabel: db-post-mongo-pod-label
+  template:
+    metadata:
+      labels:
+        podLabel: db-post-mongo-pod-label
+    spec:
+      containers:
+        - name: db-post-mongo-pod-cont
+          image: mongo
+          volumeMounts:
+            - name: db-post-mongo-volume
+              mountPath: /data/db
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: db-post-mongo-volume
+          persistentVolumeClaim:
+            claimName: db-post-mongo-pvc
