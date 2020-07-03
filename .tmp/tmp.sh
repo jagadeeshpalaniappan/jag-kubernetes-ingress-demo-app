@@ -29,7 +29,7 @@ docker build ./apps/ui-photos-app1-com -t ui-photos-app1-com-img:v1.0.0  --no-ca
 # create: all kubernetes objects (reqd for this project)
 # [ deployments, pods, services ]
 ############################################
-kubectl apply -f ./kubernetes-setup/
+kubectl apply -f ./k8s-cluster-setup/
 ############################################
 
 # check: all pods are running
@@ -62,7 +62,7 @@ http://127.0.0.1:<YOUR-PORT>/hello
 kubectl logs xxxxxx
 kubectl logs api-user-dep-9744f989b-pcrhb
 
-kubectl apply -f ./kubernetes-setup/
+kubectl apply -f ./k8s-cluster-setup/
 
 
 # -------------------- Build & Run (Docker Images)----------------------------
