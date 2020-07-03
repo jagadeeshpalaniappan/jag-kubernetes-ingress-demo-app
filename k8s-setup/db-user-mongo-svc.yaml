@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-user-mongo-svc
+spec:
+  type: ClusterIP
+  selector:
+    podLabel: db-user-mongo-pod-label
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017

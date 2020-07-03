@@ -103,7 +103,7 @@ docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
 
 
 # Delete All
-kubectl delete --all deployments --namespace=foo
+kubectl delete --all deployments --namespace=app1-ns
 kubectl delete --all pods --namespace=foo
 for each in $(kubectl get ns -o jsonpath="{.items[*].metadata.name}" | grep -v kube-system);
 do
