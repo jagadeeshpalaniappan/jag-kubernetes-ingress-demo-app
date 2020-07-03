@@ -117,3 +117,10 @@ kubectl delete --all pvc
 
 kubectl get pv | tail -n+2 | awk '{print $1}' | xargs -I{} kubectl patch pv {} -p '{"metadata":{"finalizers": null}}'
 kubectl get pvc | tail -n+2 | awk '{print $1}' | xargs -I{} kubectl patch pvc {} -p '{"metadata":{"finalizers": null}}'
+
+
+
+# 503 Service Unavailable (NGINX Ingress Issue)
+kubectl rollout restart deployment/ingress-nginx-controller
+kubectl get pods -n kube-system
+kubectl -n kube-system logs ingress-nginx-controller-84d74669fb-7c9qn
