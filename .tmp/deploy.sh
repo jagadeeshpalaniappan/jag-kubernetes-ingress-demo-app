@@ -7,15 +7,17 @@
 # ------------------Upload: Latest Code to docker------------------------------
 
 # Microservice Apps: (Node.js)
-# docker build ./apps/api-auth -t api-auth-img:v1.0.0
-# docker build ./apps/api-photo -t api-photo-img:v1.0.0
-# docker build ./apps/api-post -t api-post-img:v1.0.0
-# docker build ./apps/api-user -t api-user-img:v1.0.0
+docker build ./apps/api-auth -t api-auth-img:v1.0.0
+docker build ./apps/api-photo -t api-photo-img:v1.0.0
+docker build ./apps/api-post -t api-post-img:v1.0.0
+docker build ./apps/api-user -t api-user-img:v1.0.0
 
-# UI Apps: (Node.js) // TODO: modify to React
-# docker build ./apps/ui-app1-com -t ui-app1-com-img:v1.0.0
-# docker build ./apps/ui-blogs-app1-com -t ui-blogs-app1-com-img:v1.0.0
-# docker build ./apps/ui-photos-app1-com -t ui-photos-app1-com-img:v1.0.0
+docker build ./apps/ui-app1-com -t ui-app1-com-img:v1.0.0
+docker build ./apps/ui-blogs-app1-com -t ui-blogs-app1-com-img:v1.0.0
+docker build ./apps/ui-photos-app1-com -t ui-photos-app1-com-img:v1.0.0
+
+
+## NO-CACHE:
 # docker build ./apps/ui-photos-app1-com -t ui-photos-app1-com-img:v1.0.0  --no-cache
 
 # ------------------------------------------------
