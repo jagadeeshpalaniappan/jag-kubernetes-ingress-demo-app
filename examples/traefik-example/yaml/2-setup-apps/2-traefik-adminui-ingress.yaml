@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-adminui-ingress
+  namespace: kube-system
+spec:
+  rules:
+    - host: traefik-adminui.minikube
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: traefik-adminui-svc
+              servicePort: tr-adminui-port

@@ -21,7 +21,7 @@
 # ------------------------------------------------
 
 ############################################
-kubectl apply --force -f ./k8s-cluster-setup/
+# kubectl apply --force -f ./k8s-cluster-setup/
 ############################################
 
 
@@ -29,19 +29,19 @@ kubectl apply --force -f ./k8s-cluster-setup/
 # kubectl set image 
 # deployment/api-user-dep api-user-pod-cont=api-user-img:v1.0.0 --record
 
-# kubectl rollout restart deployment/db-mongo-dep
+kubectl rollout restart deployment/db-mongo-dep
 kubectl rollout restart deployment/db-photo-mongo-dep
 kubectl rollout restart deployment/db-post-mongo-dep
 kubectl rollout restart deployment/db-user-mongo-dep
 
-# kubectl rollout restart deployment/api-auth-dep
-# kubectl rollout restart deployment/api-photo-dep
-# kubectl rollout restart deployment/api-post-dep
-# kubectl rollout restart deployment/api-user-dep
+kubectl rollout restart deployment/api-auth-dep
+kubectl rollout restart deployment/api-photo-dep
+kubectl rollout restart deployment/api-post-dep
+kubectl rollout restart deployment/api-user-dep
 
-# kubectl rollout restart deployment/ui-app1-com-dep
-# kubectl rollout restart deployment/ui-blogs-app1-com-dep
-# kubectl rollout restart deployment/ui-photos-app1-com-dep
+kubectl rollout restart deployment/ui-app1-com-dep
+kubectl rollout restart deployment/ui-blogs-app1-com-dep
+kubectl rollout restart deployment/ui-photos-app1-com-dep
 
 echo "kubectl get pods"
 kubectl get pods

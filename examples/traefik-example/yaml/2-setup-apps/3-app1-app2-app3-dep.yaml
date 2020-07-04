@@ -1,0 +1,75 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1-dep
+  labels:
+    app: japp1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: japp1
+      podLabel: app1-pod-label
+  template:
+    metadata:
+      labels:
+        app: japp1
+        podLabel: app1-pod-label
+        version: v0.0.1
+    spec:
+      containers:
+        - name: app1-pod-cont
+          image: supergiantkir/animals:bear
+          ports:
+            - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app2-dep
+  labels:
+    app: japp1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: japp1
+      podLabel: app2-pod-label
+  template:
+    metadata:
+      labels:
+        app: japp1
+        podLabel: app2-pod-label
+        version: v0.0.1
+    spec:
+      containers:
+        - name: app2-pod-cont
+          image: supergiantkir/animals:moose
+          ports:
+            - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app3-dep
+  labels:
+    app: japp1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: japp1
+      podLabel: app3-pod-label
+  template:
+    metadata:
+      labels:
+        app: japp1
+        podLabel: app3-pod-label
+        version: v0.0.1
+    spec:
+      containers:
+        - name: app3-pod-cont
+          image: supergiantkir/animals:hare
+          ports:
+            - containerPort: 80

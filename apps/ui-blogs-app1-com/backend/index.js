@@ -7,7 +7,11 @@ const PORT = process.env.PORT || 8080;
 
 // Proxy to POSTS_API:
 const POSTS_API = "http://api-post-svc.app1-ns.svc.cluster.local";
-const proxyToPostApiOptions = { target: POSTS_API, changeOrigin: true };
+const proxyToPostApiOptions = {
+  target: POSTS_API,
+  changeOrigin: true,
+  proxyTimeout: 5000,
+};
 const proxyToPostApi = createProxyMiddleware(proxyToPostApiOptions);
 app.use("/api/**/posts**", proxyToPostApi);
 // app.get("/", (req, res) => res.send("Welcome to Jag's Blogs Home Page"));

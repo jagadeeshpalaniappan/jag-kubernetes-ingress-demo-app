@@ -2,6 +2,7 @@
 // require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const morganBody = require("morgan-body");
 const postRouter = require("./modules/post/post.route");
 const app = express();
 
@@ -16,6 +17,10 @@ db.on("connected", () => console.log("Connected to MongoDB!", MONGODB_URL));
 db.on("error", (err) => console.error("MongoDB connection error:", err));
 
 app.use(express.json());
+
+// logging: request
+morganBody(app);
+
 app.use("/api/v1/posts", postRouter);
 
 app.get("/health", (req, res) => res.json({ status: "RUNNING" }));

@@ -1,5 +1,7 @@
 # Build Docker Images (locally)
+###############################
 eval $(minikube docker-env)
+###############################
 
 # set: namespace `book-store-ns` for the current context
 kubectl config set-context --current --namespace=app1-ns
@@ -104,7 +106,7 @@ docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
 
 # Delete All
 kubectl delete --all deployments --namespace=app1-ns
-kubectl delete --all pods --namespace=foo
+kubectl delete --all svc --namespace=foo
 for each in $(kubectl get ns -o jsonpath="{.items[*].metadata.name}" | grep -v kube-system);
 do
   kubectl delete ns $each
@@ -121,6 +123,16 @@ kubectl get pvc | tail -n+2 | awk '{print $1}' | xargs -I{} kubectl patch pvc {}
 
 
 # 503 Service Unavailable (NGINX Ingress Issue)
-kubectl rollout restart deployment/ingress-nginx-controller
+kubectl rollout restart deployment/ingress-nginx-controller -n kube-system
 kubectl get pods -n kube-system
-kubectl -n kube-system logs ingress-nginx-controller-84d74669fb-7c9qn
+kubectl -n kube-system logs ingress-nginx-controller-d9885864d-5dqnf
+
+kubectl -n kube-system describe pod coredns-66bff467f8-5gn8t
+
+
+# DNS lookup issue
+kubectl apply -f https://k8s.io/examples/admin/dns/dnsutils.yaml
+
+
+nslookup infra-apps.default.svc.cluster.local
+
