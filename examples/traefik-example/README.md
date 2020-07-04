@@ -97,6 +97,10 @@ http://app3.minikube:30222/
 
 # 4.4 open: AppHub
 # http://apphub.minikube:<web-port>/
+# Apphub Home Page
+http://apphub.minikube:30222
+
+# Apphub (Other Sub Apps)
 http://apphub.minikube:30222/app1/
 http://apphub.minikube:30222/app2/
 http://apphub.minikube:30222/app3/

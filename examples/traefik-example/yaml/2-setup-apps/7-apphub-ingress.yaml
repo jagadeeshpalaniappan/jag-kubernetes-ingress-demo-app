@@ -10,6 +10,10 @@ spec:
     - host: apphub.minikube
       http:
         paths:
+          - path: /
+            backend:
+              serviceName: apphub-home-svc
+              servicePort: apphub-svc-port
           - path: /app1
             backend:
               serviceName: app1-svc

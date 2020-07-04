@@ -1,0 +1,25 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: apphub-home-pod
+  labels:
+    app: apphub
+spec:
+  containers:
+    - name: apphub-home-pod-cont
+      image: hashicorp/http-echo
+      args:
+        - "-text=Welcome to AppHub Home"
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: apphub-home-svc
+spec:
+  selector:
+    app: apphub
+  ports:
+    - name: apphub-svc-port
+      port: 80
+      targetPort: 5678 # Default port for image
