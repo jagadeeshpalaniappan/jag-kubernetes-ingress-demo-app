@@ -3,7 +3,7 @@
 eval $(minikube docker-env)
 ###############################
 
-# set: namespace `book-store-ns` for the current context
+kubectl create namespace app1-ns
 kubectl config set-context --current --namespace=app1-ns
 
 # check: namespace is set properly for the currentContext
@@ -31,7 +31,7 @@ docker build ./apps/ui-photos-app1-com -t ui-photos-app1-com-img:v1.0.0  --no-ca
 # create: all kubernetes objects (reqd for this project)
 # [ deployments, pods, services ]
 ############################################
-kubectl apply -f ./k8s-cluster-setup/
+kubectl apply -f ./kube-cluster-setup/
 ############################################
 
 # check: all pods are running
@@ -64,7 +64,7 @@ http://127.0.0.1:<YOUR-PORT>/hello
 kubectl logs xxxxxx
 kubectl logs api-user-dep-9744f989b-pcrhb
 
-kubectl apply -f ./k8s-cluster-setup/
+kubectl apply -f ./kube-cluster-setup/
 
 
 # -------------------- Build & Run (Docker Images)----------------------------
@@ -105,8 +105,10 @@ docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
 
 
 # Delete All
-kubectl delete --all deployments --namespace=app1-ns
-kubectl delete --all svc --namespace=foo
+kubectl delete --all deployments -n app1-ns
+kubectl delete --all svc -n app1-ns
+kubectl delete namespace app1-ns
+
 for each in $(kubectl get ns -o jsonpath="{.items[*].metadata.name}" | grep -v kube-system);
 do
   kubectl delete ns $each

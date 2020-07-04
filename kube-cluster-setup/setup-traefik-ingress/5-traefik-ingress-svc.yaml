@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-ingress-svc
+  namespace: kube-system
+spec:
+  selector:
+    podLabel: traefik-ingress-pod-label
+  ports:
+    - protocol: TCP
+      port: 80
+      name: web-port
+    - protocol: TCP
+      port: 8080
+      name: admin-port
+  type: NodePort

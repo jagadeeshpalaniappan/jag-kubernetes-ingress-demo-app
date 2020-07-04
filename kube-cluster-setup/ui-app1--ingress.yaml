@@ -2,11 +2,14 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: ui-app1--ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
 spec:
-  tls:
-    - hosts:
-        - app1.com
-      secretName: ui-app1--tls-secret
+  # tls:
+  #   - hosts:
+  #       - app1.com
+  #     secretName: ui-app1--tls-secret
   rules:
     - host: app1.com
       http:

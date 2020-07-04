@@ -82,7 +82,7 @@ kubectl config get-contexts
 # create: all kubernetes objects (reqd for this project)
 # [ deployments, pods, services ]
 #####################################
-kubectl apply -f ./k8s-cluster-setup/
+kubectl apply -f ./kube-cluster-setup/
 #####################################
 
 # check: all pods are running
