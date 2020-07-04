@@ -22,9 +22,17 @@ docker build ./apps/ui-photos-app1-com -t ui-photos-app1-com-img:v1.0.0
 
 # ------------------------------------------------
 
-############################################
-# kubectl apply --force -f ./kube-cluster-setup/
-############################################
+########################################################################################
+kubectl apply --force -f ./kube-cluster-setup/1-setup-pv/
+kubectl apply --force -f ./kube-cluster-setup/2-setup-db/
+kubectl apply --force -f ./kube-cluster-setup/3-setup-apps/
+
+# kubectl apply --force -f ./kube-cluster-setup/4-setup-ingress/1-setup-ingress-ctrl/traefik
+# kubectl apply --force -f ./kube-cluster-setup/4-setup-ingress/1-setup-ingress-ctrl/traefik/setup-traefik-adminui-app
+
+kubectl apply --force -f ./kube-cluster-setup/4-setup-ingress/2-setup-apps-ingress
+
+########################################################################################
 
 
 # ------------------Restart: Kube Pods------------------------------
