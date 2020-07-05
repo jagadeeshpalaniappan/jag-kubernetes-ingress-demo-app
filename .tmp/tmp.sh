@@ -43,6 +43,7 @@ kubectl get all -n book-store-ns
 
 kubectl set image deployment/ui-photos-app1-com-dep www=ui-photos-app1-com-img:v1.0.0
 docker run -it --rm ui-photos-app1-com-img:v1.0.0 sh
+docker run -it --rm ui-blogs-app1-com-img:v1.0.0 sh
 
 # ------------------------------------------------
 

@@ -14,13 +14,10 @@ const proxyToPostApiOptions = {
 };
 const proxyToPostApi = createProxyMiddleware(proxyToPostApiOptions);
 app.use("/api/**/posts**", proxyToPostApi);
-// app.get("/", (req, res) => res.send("Welcome to Jag's Blogs Home Page"));
-app.use(express.static(path.join(__dirname, "build")));
+
+// React App: 'build' dir as static folder
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.json());
-
-app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
 
 app.listen(PORT, () => console.log(`App is running at [PORT:${PORT}]`));

@@ -14,7 +14,7 @@ docker build ./apps/api-post -t api-post-img:v1.0.0
 docker build ./apps/api-user -t api-user-img:v1.0.0
 
 # docker build ./apps/ui-app1-com -t ui-app1-com-img:v1.0.0
-# docker build ./apps/ui-blogs-app1-com -t ui-blogs-app1-com-img:v1.0.0
+docker build ./apps/ui-blogs-app1-com -t ui-blogs-app1-com-img:v1.0.0
 # docker build ./apps/ui-photos-app1-com -t ui-photos-app1-com-img:v1.0.0
 
 
