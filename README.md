@@ -31,23 +31,12 @@ brew install minikube
 
 # Start Minikube
 minikube start --driver=hyperkit
-
-# Enable Ingress Controller in Minikube
-minikube addons enable ingress
-
-# check: Ingress Controller is enabled
-minikube addons list
-
-# check: Ingress Controller is running
-# look: someting like this 'ingress-nginx-controller-xxx-yyy'
-kubectl get pods -n kube-system
-
 ```
 
-### Step2: App Setup (Build Docker Images)
+### Step2: Build 'App' Docker Images
 
 ```shell
-# Point to Local Docker Registry (VERY IMP)
+# Point to Local Docker Registry
 ###############################
 eval $(minikube docker-env)
 ###############################
@@ -81,18 +70,36 @@ kubectl config get-contexts
 
 # create: all kubernetes objects (reqd for this project)
 # [ deployments, pods, services ]
-#####################################
-kubectl apply -f ./kube-cluster-setup/
-#####################################
+##########################################################################################################
+
+# 1. setup: PersistentVolume
+kubectl apply --force -f ./kube-cluster-setup/1-setup-pv/
+
+# 2. setup: Database [Deployments & Services]
+kubectl apply --force -f ./kube-cluster-setup/2-setup-db/
+
+# 3. setup: App [Deployments & Services]
+kubectl apply --force -f ./kube-cluster-setup/3-setup-apps/
+
+# 4. setup: Traefik [Ingress Controller]
+kubectl apply --force -f ./kube-cluster-setup/4-setup-ingress/1-setup-ingress-ctrl/traefik
+
+# 5. setup: Traefik Admin App [Service & Ingress]
+kubectl apply --force -f ./kube-cluster-setup/4-setup-ingress/1-setup-ingress-ctrl/traefik/setup-traefik-adminui-app
+
+# 6. setup: HTTPS TLS Secret [Secret]
+kubectl apply --force -f ./kube-cluster-setup/4-setup-ingress/2-setup-https-secret
+
+# 7. setup: App [Ingress]
+kubectl apply --force -f ./kube-cluster-setup/4-setup-ingress/3-setup-apps-ingress
+
+##########################################################################################################
 
 # check: all pods are running
 kubectl get pods
 
 # check: all objects
 kubectl get all -n app1-ns
-
-# check: all services
-minikube service list
 
 ```
 
