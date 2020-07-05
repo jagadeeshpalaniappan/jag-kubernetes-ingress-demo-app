@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: apphub-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+    - host: apphub.minikube
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: apphub-home-svc
+              servicePort: apphub-svc-port
+          - path: /app1
+            backend:
+              serviceName: app1-svc
+              servicePort: app1-svc-port
+          - path: /app2
+            backend:
+              serviceName: app2-svc
+              servicePort: app2-svc-port
+          - path: /app3
+            backend:
+              serviceName: app3-svc
+              servicePort: app3-svc-port

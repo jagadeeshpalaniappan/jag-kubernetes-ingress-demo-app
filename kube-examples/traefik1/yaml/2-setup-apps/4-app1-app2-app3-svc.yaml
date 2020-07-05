@@ -1,0 +1,41 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app1-svc
+spec:
+  ports:
+    - name: app1-svc-port
+      targetPort: 80
+      port: 80
+  selector:
+    app: japp1
+    podLabel: app1-pod-label
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app2-svc
+spec:
+  ports:
+    - name: app2-svc-port
+      targetPort: 80
+      port: 80
+  selector:
+    app: japp1
+    podLabel: app2-pod-label
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app3-svc
+  annotations:
+    traefik.backend.circuitbreaker: "NetworkErrorRatio() > 0.5"
+spec:
+  ports:
+    - name: app3-svc-port
+      targetPort: 80
+      port: 80
+  selector:
+    app: japp1
+    podLabel: app3-pod-label

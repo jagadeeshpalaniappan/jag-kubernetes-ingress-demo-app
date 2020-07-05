@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traefik-ingress-dep
+  namespace: kube-system
+  labels:
+    podLabel: traefik-ingress-pod-label
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      podLabel: traefik-ingress-pod-label
+  template:
+    metadata:
+      labels:
+        podLabel: traefik-ingress-pod-label
+    spec:
+      serviceAccountName: traefik-ingress-sa
+      terminationGracePeriodSeconds: 60
+      containers:
+        - image: traefik:v1.7.14
+          name: traefik-ingress-pod-cont
+          ports:
+            - name: http
+              containerPort: 80
+            - name: https
+              containerPort: 443
+            - name: admin
+              containerPort: 8080
+          args:
+            - --api
+            - --kubernetes
+            - --logLevel=INFO

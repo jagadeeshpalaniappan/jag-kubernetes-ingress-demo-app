@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ui-app1-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+    traefik.ingress.kubernetes.io/frontend-entry-points: http
+spec:
+  rules:
+    - host: app1.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: ui-app1-com-svc
+              servicePort: 8080
+          - path: /photos
+            backend:
+              serviceName: ui-photos-app1-com-svc
+              servicePort: 80
+          - path: /blogs
+            backend:
+              serviceName: ui-blogs-app1-com-svc
+              servicePort: 80
+    - host: photos.app1.com
+      http:
+        paths:
+          - backend:
+              serviceName: ui-photos-app1-com-svc
+              servicePort: 80

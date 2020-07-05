@@ -31,10 +31,10 @@ postCtrl.getById = (req, res) => {
 };
 
 postCtrl.create = async (req, res) => {
-  const { title, authorId } = req.body;
-  console.log("create: ", { title, authorId });
+  const { title, body, authorId } = req.body;
+  console.log("create: ", { title, body, authorId });
 
-  const post = new Post({ title, authorId });
+  const post = new Post({ title, body, authorId });
   try {
     const newPost = await post.save();
     res.status(201).json({ newPost });
@@ -46,6 +46,9 @@ postCtrl.create = async (req, res) => {
 postCtrl.patch = async (req, res) => {
   if (req.body.title) {
     res.post.title = req.body.title;
+  }
+  if (req.body.body) {
+    res.post.body = req.body.body;
   }
   if (req.body.authorId) {
     res.post.authorId = req.body.authorId;

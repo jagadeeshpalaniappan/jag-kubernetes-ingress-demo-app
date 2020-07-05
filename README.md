@@ -31,23 +31,12 @@ brew install minikube
 
 # Start Minikube
 minikube start --driver=hyperkit
-
-# Enable Ingress Controller in Minikube
-minikube addons enable ingress
-
-# check: Ingress Controller is enabled
-minikube addons list
-
-# check: Ingress Controller is running
-# look: someting like this 'ingress-nginx-controller-xxx-yyy'
-kubectl get pods -n kube-system
-
 ```
 
-### Step2: App Setup (Build Docker Images)
+### Step2: Build 'App' Docker Images
 
 ```shell
-# Point to Local Docker Registry (VERY IMP)
+# Point to Local Docker Registry
 ###############################
 eval $(minikube docker-env)
 ###############################
@@ -81,18 +70,36 @@ kubectl config get-contexts
 
 # create: all kubernetes objects (reqd for this project)
 # [ deployments, pods, services ]
-#####################################
-kubectl apply -f ./kubernetes-setup/
-#####################################
+##########################################################################################################
+
+# 1. setup: PersistentVolume
+kubectl apply --force -f ./kube-cluster-setup/1-setup-pv/
+
+# 2. setup: Database [Deployments & Services]
+kubectl apply --force -f ./kube-cluster-setup/2-setup-db/
+
+# 3. setup: App [Deployments & Services]
+kubectl apply --force -f ./kube-cluster-setup/3-setup-apps/
+
+# 4. setup: Traefik [Ingress Controller]
+kubectl apply --force -f ./kube-cluster-setup/4-setup-ingress/1-setup-ingress-ctrl/traefik
+
+# 5. setup: Traefik Admin App [Service & Ingress]
+kubectl apply --force -f ./kube-cluster-setup/4-setup-ingress/1-setup-ingress-ctrl/traefik/setup-traefik-adminui-app
+
+# 6. setup: HTTPS TLS Secret [Secret]
+kubectl apply --force -f ./kube-cluster-setup/4-setup-ingress/2-setup-https-secret
+
+# 7. setup: App [Ingress]
+kubectl apply --force -f ./kube-cluster-setup/4-setup-ingress/3-setup-apps-ingress
+
+##########################################################################################################
 
 # check: all pods are running
 kubectl get pods
 
 # check: all objects
 kubectl get all -n app1-ns
-
-# check: all services
-minikube service list
 
 ```
 
@@ -102,7 +109,8 @@ minikube service list
 # copy: IP address (Note: if you dont see any address, wait for sometime and try again)
 kubectl get ingress
 
-# add domain names in host file (for local testing) & paste: IP address
+#### Register 'app1.com' domain (locally)
+# add domain names in host file (for local testing) & paste: ingress IP address
 sudo vi /etc/hosts
 
 # add host entires (paste your own IP)
@@ -137,4 +145,34 @@ openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -subj "/CN=app1.com"
 # copy & paste: the results to ui-app1--tls-secret.yaml
 cat tls.crt | base64
 cat tls.key | base64
+```
+
+### Build & Run (Docker Images) --without Kubernetes
+
+```shell
+# open: new terminal (dont run on the same minikube terminal)
+# check: Docker Desktop is Running
+
+# build: docker image
+docker build -t testdocker-img:v1.0.0 ./
+
+# view: docker image content
+docker run -it testdocker-img:v1.0.0 sh
+ls -l
+exit
+
+# run: docker image
+docker run -it -p 9002:8080 testdocker-img:v1.0.0
+# open: http://localhost:9002
+
+# run: docker image (in detached mode)
+docker run -d -p 9002:8080 testdocker-img:v1.0.0
+# open: http://localhost:9002
+
+# List All Process running
+$ docker ps
+
+# Print app output
+$ docker logs <containerId>
+
 ```

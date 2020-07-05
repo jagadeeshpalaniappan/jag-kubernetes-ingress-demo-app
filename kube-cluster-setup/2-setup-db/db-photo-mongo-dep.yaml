@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-photo-mongo-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      podLabel: db-photo-mongo-pod-label
+  template:
+    metadata:
+      labels:
+        podLabel: db-photo-mongo-pod-label
+    spec:
+      containers:
+        - name: db-photo-mongo-pod-cont
+          image: mongo
+          volumeMounts:
+            - name: db-photo-mongo-volume
+              mountPath: /data/db
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: db-photo-mongo-volume
+          persistentVolumeClaim:
+            claimName: db-photo-mongo-pvc

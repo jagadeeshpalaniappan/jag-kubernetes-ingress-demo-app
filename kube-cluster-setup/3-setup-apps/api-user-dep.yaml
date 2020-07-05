@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-user-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      podLabel: api-user-pod-label
+  template:
+    metadata:
+      labels:
+        podLabel: api-user-pod-label
+    spec:
+      containers:
+        - name: api-user-pod-cont
+          image: api-user-img:v1.0.0
+          imagePullPolicy: Never
+          env:
+            - name: DATABASE_URL
+              value: "mongodb://db-user-mongo-svc.app1-ns.svc.cluster.local:27017/user-db"
+          ports:
+            - containerPort: 8080

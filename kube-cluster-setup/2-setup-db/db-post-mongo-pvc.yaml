@@ -1,0 +1,13 @@
+# PersistentVolumeClaim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: db-post-mongo-pvc
+spec:
+  storageClassName: fast
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+# After we create 'pvc', k8s automatically finds a suitable PersistentVolume with the same storageClassName
