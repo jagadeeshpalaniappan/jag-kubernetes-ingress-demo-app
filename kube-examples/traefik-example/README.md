@@ -109,4 +109,6 @@ http://apphub.minikube:30222/app3/
 ```
 
 For more details, Please read this link.
-https://medium.com/kubernetes-tutorials/deploying-traefik-as-ingress-controller-for-your-kubernetes-cluster-b03a0672ae0c
+
+- [Link1](https://medium.com/kubernetes-tutorials/deploying-traefik-as-ingress-controller-for-your-kubernetes-cluster-b03a0672ae0c)
+- [Link2](https://github.com/dusansusic/kubernetes-traefik) // TODO

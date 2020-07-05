@@ -1,15 +1,16 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: ui-app1--ingress
+  name: ui-app1-ingress
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.frontend.rule.type: PathPrefixStrip
+    traefik.ingress.kubernetes.io/frontend-entry-points: http
 spec:
-  # tls:
-  #   - hosts:
-  #       - app1.com
-  #     secretName: ui-app1--tls-secret
+  tls:
+    - hosts:
+        - app1.com
+      secretName: ui-app1-tls-secret
   rules:
     - host: app1.com
       http:
@@ -25,16 +26,10 @@ spec:
           - path: /blogs
             backend:
               serviceName: ui-blogs-app1-com-svc
-              servicePort: 8080
+              servicePort: 80
     - host: photos.app1.com
       http:
         paths:
           - backend:
               serviceName: ui-photos-app1-com-svc
               servicePort: 80
-    - host: blogs.app1.com
-      http:
-        paths:
-          - backend:
-              serviceName: ui-blogs-app1-com-svc
-              servicePort: 8080

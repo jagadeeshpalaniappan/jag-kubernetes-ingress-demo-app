@@ -29,10 +29,12 @@ docker build ./apps/api-user -t api-user-img:v1.0.0
 
 kubectl apply --force -f ./kube-cluster-setup/3-setup-apps/
 
-# kubectl apply --force -f ./kube-cluster-setup/4-setup-ingress/1-setup-ingress-ctrl/traefik
+kubectl apply --force -f ./kube-cluster-setup/4-setup-ingress/1-setup-ingress-ctrl/traefik
 # kubectl apply --force -f ./kube-cluster-setup/4-setup-ingress/1-setup-ingress-ctrl/traefik/setup-traefik-adminui-app
 
-# kubectl apply --force -f ./kube-cluster-setup/4-setup-ingress/2-setup-apps-ingress
+kubectl apply --force -f ./kube-cluster-setup/4-setup-ingress/2-setup-https-secret
+
+kubectl apply --force -f ./kube-cluster-setup/4-setup-ingress/3-setup-apps-ingress
 
 ########################################################################################
 
