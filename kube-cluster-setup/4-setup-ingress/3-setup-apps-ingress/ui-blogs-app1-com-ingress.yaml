@@ -10,7 +10,7 @@ spec:
   tls:
     - hosts:
         - blogs.app1.com
-      secretName: ui-app1-tls-secret
+      secretName: ui-blogs-app1-com-tls-secret
   rules:
     - host: blogs.app1.com
       http:

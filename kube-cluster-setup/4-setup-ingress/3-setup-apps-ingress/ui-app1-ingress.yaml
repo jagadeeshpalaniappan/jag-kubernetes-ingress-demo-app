@@ -7,10 +7,6 @@ metadata:
     traefik.frontend.rule.type: PathPrefixStrip
     traefik.ingress.kubernetes.io/frontend-entry-points: http
 spec:
-  tls:
-    - hosts:
-        - app1.com
-      secretName: ui-app1-tls-secret
   rules:
     - host: app1.com
       http:

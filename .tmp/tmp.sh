@@ -138,3 +138,6 @@ kubectl apply -f https://k8s.io/examples/admin/dns/dnsutils.yaml
 
 nslookup infra-apps.default.svc.cluster.local
 
+
+
+openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -subj "/CN=blogs.app1.com" -keyout tls.key -out tls.crt
