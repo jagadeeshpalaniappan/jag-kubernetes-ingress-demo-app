@@ -16,3 +16,6 @@ spec:
         - name: api-post-pod-cont
           image: api-post-img:v1.0.0
           imagePullPolicy: Never
+          env:
+            - name: DATABASE_URL
+              value: "mongodb://db-post-mongo-svc.app1-ns.svc.cluster.local:27017/post-db"
